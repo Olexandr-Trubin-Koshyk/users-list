@@ -3,15 +3,13 @@ import {
   AppBar,
   Box,
   Toolbar,
-  IconButton,
   Typography,
   Menu,
   Container,
   Button,
-  MenuItem,
+  IconButton,
 } from '@mui/material';
-
-const pages = ['Users'];
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -20,11 +18,16 @@ export const Header = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
+  const navigate = useNavigate();
+
+  const usersNavigate = () => {
+    navigate('/users');
+  }
+  
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -59,7 +62,6 @@ export const Header = () => {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',
@@ -73,13 +75,10 @@ export const Header = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              }}>
+              <Box>
+                <Button onClick={usersNavigate}>Users</Button>
+              </Box>
             </Menu>
           </Box>
           <Typography
@@ -101,15 +100,12 @@ export const Header = () => {
             List
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={usersNavigate}
+            >
+              Users
+            </Button>
           </Box>
         </Toolbar>
       </Container>

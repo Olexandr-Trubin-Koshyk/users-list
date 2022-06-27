@@ -1,12 +1,16 @@
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Header } from './Components/Header/Header';
+import { UsersList } from './Components/UsersList/UsersList';
 
-function App() {
+export const App: FC = () => {
   return (
     <div className="App">
       <Header />
+      <Routes>
+        <Route path="/users" element={<UsersList />} />
+      </Routes>
     </div>
   );
 }
-
-export default App;
