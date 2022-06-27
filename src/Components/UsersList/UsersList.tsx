@@ -54,7 +54,7 @@ export const UsersList: FC<Props> = ({ setEditUser }) => {
   }
 
   const onEditUser = (user: User) => {
-    navigate(`/edit/${user.id}`)
+    navigate(`/edit`)
     setEditUser(user);
   }
 
@@ -74,7 +74,7 @@ export const UsersList: FC<Props> = ({ setEditUser }) => {
     selectedGender === 'all' 
       ? setFilteredUsers(usersFromServer)
       : setFilteredUsers(usersFromServer.filter((user: User) => user.gender === selectedGender))
-  }, [usersFromServer, selectedGender])
+  }, [usersFromServer, selectedGender, setUsersFromServer])
   
   return (
     <TableContainer component={Paper} sx={{ paddingBottom: '32px' }}>

@@ -16,7 +16,7 @@ export const App: FC = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/users" element={<UsersList setEditUser={setEditUser} />} />
-        <Route path="/edit/:id" element={<EditUser user={editUser} />} />
+        <Route path="/edit" element={<EditUser user={editUser} />} />
       </Routes>
     </div>
   );
