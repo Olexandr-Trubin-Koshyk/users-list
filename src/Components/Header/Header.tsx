@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, FC } from 'react';
 import {
   AppBar,
   Box,
@@ -11,8 +11,8 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+export const Header: FC = () => {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -27,6 +27,10 @@ export const Header = () => {
   const usersNavigate = () => {
     navigate('/users');
   }
+
+  const mainPageNavigate = () => {
+    navigate('/');
+  }
   
   return (
     <AppBar position="static">
@@ -36,7 +40,7 @@ export const Header = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            onClick={mainPageNavigate}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -45,6 +49,7 @@ export const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer'
             }}
           >
             List

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { getUsers } from "../../api/api";
 import { SelectedGender, User } from "../../types";
+import { useNavigate } from 'react-router-dom';
 
 import {
   Table,
@@ -18,7 +19,13 @@ import {
   Button,
 } from '@mui/material';
 
-export const UsersList = () => {
+interface Props {
+  setEditUser: any;
+};
+
+export const UsersList: FC<Props> = ({ setEditUser }) => {
+  const navigate = useNavigate();
+
   const [usersFromServer, setUsersFromServer] = useState<User[]>([]);
   const [nextUsers, setNextUsers] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +33,7 @@ export const UsersList = () => {
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [selectedGender, setSelectedGender] = useState<SelectedGender>('all');
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const selectGender = (event: SelectChangeEvent) => {
     const { value } = event.target;
     setSelectedGender(value as SelectedGender);
   }
@@ -46,6 +53,11 @@ export const UsersList = () => {
     setIsLoading(false);
   }
 
+  const onEditUser = (user: User) => {
+    navigate(`/edit`)
+    setEditUser(user);
+  }
+
   useEffect(() => {
     getUsers()
       .then(response => {
@@ -62,24 +74,28 @@ export const UsersList = () => {
     selectedGender === 'all' 
       ? setFilteredUsers(usersFromServer)
       : setFilteredUsers(usersFromServer.filter((user: User) => user.gender === selectedGender))
-  }, [usersFromServer, selectedGender])
+  }, [usersFromServer, selectedGender, setUsersFromServer])
   
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700}} aria-label="customized table">
+    <TableContainer component={Paper} sx={{ paddingBottom: '32px' }}>
+      <Table sx={{ minWidth: 700, padding: '8px' }} aria-label="customized table">
         <TableHead sx={{ backgroundColor: 'lightblue' }}>
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <InputLabel sx={{ borderColor: 'black', ":active": 'border-color: black' }} id="genderSelect">Gender</InputLabel>
+                <InputLabel
+                  id="genderSelect"
+                >
+                  Gender
+                </InputLabel>
                 <Select
                   labelId="genderSelectLabel"
-                  id="gendersSelect"
+                  id="genderSelect"
                   label="Gender"
                   value={selectedGender}
-                  onChange={handleChange}
+                  onChange={selectGender}
                 >
                   <MenuItem value='all'>All</MenuItem>
                   <MenuItem value='male'>male</MenuItem>
@@ -92,7 +108,7 @@ export const UsersList = () => {
         </TableHead>
         <TableBody>
           {filteredUsers.map((user: User) => (
-            <TableRow key={user.id}>
+            <TableRow key={user.id} hover={true} onClick={() => onEditUser(user)}>
               <TableCell component="th" scope="row">
                 {user.name}
               </TableCell>
@@ -109,7 +125,7 @@ export const UsersList = () => {
       </p>)
       } 
       {
-        nextUsers !== '' && ( 
+        nextUsers !== '' && !isLoading && ( 
           <Button 
             variant="contained" 
             size="medium"
