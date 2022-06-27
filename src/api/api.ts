@@ -1,6 +1,6 @@
 import { User } from "../types";
 
-export const API_TOKEN = 'f4530e048cb703679687b94457701128b3439a269826740a450897a132b12a03';
+const API_TOKEN = 'f4530e048cb703679687b94457701128b3439a269826740a450897a132b12a03';
 const API_BASE_URL = 'https://gorest.co.in/public/v1/users';
 
 export const getUsers = async(query = API_BASE_URL) => {
