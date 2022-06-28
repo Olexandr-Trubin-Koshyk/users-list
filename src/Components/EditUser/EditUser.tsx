@@ -43,7 +43,7 @@ export const EditUser: FC<Props> = ({ user }) => {
     setStatus(event.target.value as Status);
   }
 
-  const onAcceptChange = async(event: React.SyntheticEvent) => {
+  const onAcceptChange = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     if (user !== null && name !== undefined && email !== undefined && gender !== undefined && status !== undefined) {
@@ -55,10 +55,8 @@ export const EditUser: FC<Props> = ({ user }) => {
         status,
       };
 
-      await updateUser(updatedUser);
+      updateUser(updatedUser);
     }
-
-    console.log('Accept');
     navigate('/users');
   }
 
