@@ -15,7 +15,7 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateUser } from "../../api/api";
 import { Gender, Status, User } from "../../types";
-import { UserNotFound } from "../UserNotFound/UserNotFound";
+import { PageNotFound } from "../PageNotFound/PageNotFound";
 
 interface Props {
   user: User | null;
@@ -43,7 +43,7 @@ export const EditUser: FC<Props> = ({ user }) => {
     setStatus(event.target.value as Status);
   }
 
-  const onAcceptChange = (event: React.SyntheticEvent) => {
+  const onAcceptChange = async(event: React.SyntheticEvent) => {
     event.preventDefault();
 
     if (user !== null && name !== undefined && email !== undefined && gender !== undefined && status !== undefined) {
@@ -55,7 +55,7 @@ export const EditUser: FC<Props> = ({ user }) => {
         status,
       };
 
-      updateUser(updatedUser);
+      await updateUser(updatedUser);
     }
     navigate('/users');
   }
@@ -152,7 +152,7 @@ export const EditUser: FC<Props> = ({ user }) => {
             </Box>
           )
           : (
-            <UserNotFound />
+            <PageNotFound />
           )
       }
     </Paper>
