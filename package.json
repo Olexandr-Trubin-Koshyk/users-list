@@ -1,6 +1,7 @@
 {
   "name": "users-list",
   "version": "0.1.0",
+  "homepage": "https://olexandr-trubin-koshyk.github.io/users-list/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
