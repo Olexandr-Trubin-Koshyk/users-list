@@ -9,7 +9,7 @@ import { UsersList } from './Components/UsersList/UsersList';
 import { User } from './types';
 
 export const App: FC = () => {
-  const [editUser, setEditUser] = useState<User | null>(null);
+  const [editUser, setEditUser] = useState<User | null>(null);  
 
   return (
     <div className="App">

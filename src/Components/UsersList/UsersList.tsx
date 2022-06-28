@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 
 interface Props {
-  setEditUser: any;
+  setEditUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
 export const UsersList: FC<Props> = ({ setEditUser }) => {
