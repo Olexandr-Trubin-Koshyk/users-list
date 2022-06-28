@@ -54,8 +54,8 @@ export const UsersList: FC<Props> = ({ setEditUser }) => {
   }
 
   const onEditUser = (user: User) => {
-    navigate(`/edit`)
     setEditUser(user);
+    navigate(`/edit`)
   }
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export const UsersList: FC<Props> = ({ setEditUser }) => {
     selectedGender === 'all' 
       ? setFilteredUsers(usersFromServer)
       : setFilteredUsers(usersFromServer.filter((user: User) => user.gender === selectedGender))
-  }, [usersFromServer, selectedGender, setUsersFromServer])
+  }, [usersFromServer, selectedGender])
   
   return (
     <TableContainer component={Paper} sx={{ paddingBottom: '32px' }}>
