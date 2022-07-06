@@ -17,6 +17,9 @@ export const App: FC = () => {
   })
 
   const onClicked = () => {
+    console.log(tg);
+    console.log(tg.MainButton);
+    tg.backgroundColor = '#fff';
     tg.MainButton.text = 'Test';
     tg.MainButton.show();
   }
