@@ -68,6 +68,7 @@ export const UsersList: FC<Props> = ({ setEditUser }) => {
         return setNextUsers(response.meta.pagination.links.next);
       })
       .then(() => setIsLoading(false))
+
   }, []);
 
   useEffect(() => {
